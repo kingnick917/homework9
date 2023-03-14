@@ -8,19 +8,12 @@ const readFromFile = util.promisify(fs.readFile);
 
 
 
-
-
-
-
-router.get('/notes', (req, res) => {
-    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
-
-});
-
-
 router.post('/notes', (req, res) => {
+    res.status(200);
     console.log('this route')
-    console.log(req)
+    console.log(req.body)
+    // const { title, text } = req.body
+    // console.log(title, text);
     // fs.readFile('./db/db.json', 'utf8', (err, data) => {
     //     if (err) {
     //       console.error(err);
@@ -32,11 +25,17 @@ router.post('/notes', (req, res) => {
 
     //   });
     res.json(req.body);
-
-
-
-
 })
+
+
+
+router.get('/notes', (req, res) => {
+    readFromFile('./db/db.json').then((data) => res.json(JSON.parse(data)));
+
+});
+
+
+
 
 const writeToFile = (destination, content) =>
     fs.writeFile(destination, JSON.stringify(content, null, 4), (err) =>
