@@ -12,18 +12,18 @@ router.post('/notes', (req, res) => {
     res.status(200);
     console.log('this route')
     console.log(req.body)
-    // const { title, text } = req.body
-    // console.log(title, text);
-    // fs.readFile('./db/db.json', 'utf8', (err, data) => {
-    //     if (err) {
-    //       console.error(err);
-    //     } else {
-    //       const parsedData = JSON.parse(data);
-    //       parsedData.push(req.body);
-    //       writeToFile('./db/db.json', parsedData);
-    //     }
+    const { title, text } = req.body
+    console.log(title, text);
+    fs.readFile('./db/db.json', 'utf8', (err, data) => {
+        if (err) {
+          console.error(err);
+        } else {
+          const parsedData = JSON.parse(data);
+          parsedData.push(req.body);
+          writeToFile('./db/db.json', parsedData);
+        }
 
-    //   });
+      });
     res.json(req.body);
 })
 
